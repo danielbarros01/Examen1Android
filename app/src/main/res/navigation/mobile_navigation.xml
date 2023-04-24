@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_notas">
+
+    <dialog
+        android:id="@+id/nav_salir"
+        android:name="com.example.mimenu.Alerta"
+        android:label="Alerta" />
+    <fragment
+        android:id="@+id/nav_notas"
+        android:name="com.example.mimenu.ui.listaNotas.NotasFragment"
+        android:label="fragment_notas"
+        tools:layout="@layout/fragment_notas" />
+    <fragment
+        android:id="@+id/nav_nuevaNota"
+        android:name="com.example.mimenu.ui.listaNotas.CargarNotaFragment"
+        android:label="fragment_cargar_nota"
+        tools:layout="@layout/fragment_cargar_nota" />
+</navigation>
