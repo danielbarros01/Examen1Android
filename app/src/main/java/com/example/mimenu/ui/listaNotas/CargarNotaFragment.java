@@ -47,8 +47,11 @@ public class CargarNotaFragment extends Fragment {
         viewModel.getNota().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                MainActivity.listNotas.add(s);
-                Log.d("1", MainActivity.listNotas + "");
+                //validacion necesaria para cuando cambio de activity no se vuelva a cargar el ultimo elemento
+                if (!MainActivity.listNotas.contains(s)) {
+                    MainActivity.listNotas.add(s);
+                }
+                Log.d("1", MainActivity.listNotas.size()+"");
                 nota.setText("");
             }
         });
