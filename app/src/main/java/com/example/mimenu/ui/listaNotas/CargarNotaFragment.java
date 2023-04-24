@@ -1,5 +1,6 @@
 package com.example.mimenu.ui.listaNotas;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -8,15 +9,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.mimenu.MainActivity;
 import com.example.mimenu.R;
+import com.example.mimenu.databinding.FragmentCargarNotaBinding;
+import com.example.mimenu.databinding.FragmentNotasBinding;
+
+import java.io.Console;
 
 public class CargarNotaFragment extends Fragment {
 
-    private CargarNotaViewModel mViewModel;
+    private FragmentCargarNotaBinding binding;
+    private CargarNotaViewModel viewModel;
+    private EditText nota;
+    private Button btnCargar;
 
     public static CargarNotaFragment newInstance() {
         return new CargarNotaFragment();
@@ -25,14 +37,37 @@ public class CargarNotaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_cargar_nota, container, false);
+        binding = FragmentCargarNotaBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        nota = binding.etNota;
+        btnCargar = binding.btnCargar;
+
+        viewModel = new ViewModelProvider(this).get(CargarNotaViewModel.class);
+
+        viewModel.getNota().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                MainActivity.listNotas.add(s);
+                Log.d("1", MainActivity.listNotas + "");
+                nota.setText("");
+            }
+        });
+
+        return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(CargarNotaViewModel.class);
         // TODO: Use the ViewModel
+
+        btnCargar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String n = nota.getText().toString();
+                viewModel.cargarNota(n);
+            }
+        });
     }
 
 }
