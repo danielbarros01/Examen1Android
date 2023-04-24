@@ -12,11 +12,11 @@
     <fragment
         android:id="@+id/nav_notas"
         android:name="com.example.mimenu.ui.listaNotas.NotasFragment"
-        android:label="fragment_notas"
+        android:label="Notas"
         tools:layout="@layout/fragment_notas" />
     <fragment
         android:id="@+id/nav_nuevaNota"
         android:name="com.example.mimenu.ui.listaNotas.CargarNotaFragment"
-        android:label="fragment_cargar_nota"
+        android:label="Nueva nota"
         tools:layout="@layout/fragment_cargar_nota" />
 </navigation>
